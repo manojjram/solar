@@ -1,0 +1,232 @@
+body {
+   font-family: "Open Sans","Helvetica Neue",Arial,sans-serif;
+   font-size: 14px;
+   line-height: 1.42857;
+   color: #626262;
+}
+
+
+.site-navbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #5d5b6a;
+}
+
+.site-logo {
+    color: #ffffff !important;
+    font-size: 24px;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+}
+
+.header {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+#results {
+    margin-left: 10px;
+}
+
+#search-box {
+    padding-bottom: 10px;
+}
+
+.spinner-border {
+    margin: 15px;
+}
+
+.main {
+    height: calc(100% - 180px);
+}
+
+.button-group {
+    padding-left: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+.table-adj {
+    max-width: 550px;
+    display: block;
+    padding-left: 5px;
+}
+
+.results {
+    box-shadow: -2px 2px 5px 0 rgb(0 0 0 / 40%);
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.places_tiles {
+    box-shadow: -2px 2px 5px 0 rgb(0 0 0 / 40%);
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    border-radius: 0px;
+    border: 1px solid rgb(209, 209, 213);
+    background-color: #5d5b6a; !important;
+}
+
+#google-map {
+    min-height: 600px;
+    max-width: 1200px;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.results {
+    max-height: 600px;
+}
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+#search {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+}
+
+.search {
+    width: 100%;
+    margin-bottom: auto;
+    height: 50px;
+    background-color: #fff;
+    padding: 10px;
+    border-color: #6c757d !important;
+    border: 1px solid;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.search-input {
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    margin-top: 5px;
+    caret-color: transparent;
+    line-height: 20px;
+    transition: width 0.4s linear
+}
+
+.search .search-input {
+    padding: 0 10px;
+    width: 100%;
+    caret-color: #536bf6;
+    font-size: 19px;
+    font-weight: 300;
+    color: black;
+    transition: width 0.4s linear
+}
+
+.search-icon {
+    height: 34px;
+    width: 34px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #d3d3d3;
+    font-size: 10px;
+    bottom: 30px;
+    position: relative;
+    border-radius: 5px
+}
+
+.search-icon:hover {
+    color: #fff !important
+}
+
+a:link {
+    text-decoration: none
+}
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+#target {
+  width: 345px;
+}
+
+#load-spinner {
+    display: none;
+}
+
+#load-spinner-two {
+    display: none;
+}
+
+.map-controls{
+    margin: 10px;
+}
+
+#table-tiles {
+    display: none;
+}
+
+#table-segmentation {
+    display: none;
+}
+
+#table-classification {
+    display: none;
+}
+
+.navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, .25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+
+.navbar .navbar-toggler {
+  top: .25rem;
+  right: 1rem;
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}

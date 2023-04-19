@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Solar Panel Detection</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+            <img class="logo" src="/img/logo_1.svg" /> HyperionSolarNet
+        </a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Sign out</a>
+            </li>
+        </ul>
+    </header>
+    <div class="container-fluid main">
+        <div class="row g-0">
+            <div class="col-sm-12">
+                <div class="search"> <input type="text" id="search" class="search-input" placeholder="Search..." name=""> <a href="#" class="search-icon"> <i class="fa fa-search"></i> </a> </div>
+            </div>
+        </div>
+        <div class="row g-0 h-100">
+            <div class="col-sm-4 results h-100">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" onclick='modifyMinZoom(19)'>Online</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" onclick='modifyMinZoom(5)'>Preprocessed</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <div class="results">
+                          <div class="button-group">
+                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick='getObjects("tiles")'>Display Tiles</button>
+                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick='getObjects("classification")'>Classify Solar Tiles</button>
+                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick='getObjects("segmentation")'>Segment Solar Tiles</button>
+                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick='removeOverlays()'>Remove Overlays</button>
+                          </div>
+                          <div class="header">
+                                <h3> Map information </h1>
+                          </div>
+                          <div class="map-controls">
+                              <ul>
+                                  <li><div id="map-options-zoom"></div></li>
+                                  <li><div id="map-options-center"></div></li>
+                              </ul>
+                          </div>
+                          <div id="load-spinner" class="spinner-border" role="status">
+                              <span class="sr-only">Loading...</span>
+                          </div>
+                          <div class="header">
+                                <h3> Results </h1>
+                          </div>
+                          <div id="results">
+                              <table id="table-results" data-pagination="true" data-page-size="32" class="table">
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <div class="places_tiles">
+                          <div class="button-group">
+                              <button type="button" class="btn btn-sm btn-outline-secondary" onclick='removePlaceTiles()'>Remove Inference Overlays</button>
+                          </div>
+                          <div id="load-spinner-two" class="spinner-border" role="status">
+                              <span class="sr-only">Loading...</span>
+                          </div>
+                          <div class="header">
+                                <h3> Preprocessed Regions </h1>
+                          </div>
+                          <table class="table table-adj">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">City/State</th>
+                                  <th scope="col"># Tiles</th>
+                                  <th scope="col"># SP Tiles</th>
+                                  <th scope="col"># SP</th>
+                                  <th scope="col">Total SP Area</th>
+                                  <th scope="col">Inference</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>Berkeley</td>
+                                  <td id="berkeley_tile">-</td>
+                                  <td id="berkeley_tile_sp">-</td>
+                                  <td id="berkeley_sp">-</td>
+                                  <td id="berkeley_area">-</td>
+                                  <td><button type="button" class="btn btn-sm btn-outline-secondary" onclick="goToPlace(-122.272781, 37.871666, 'berkeley')">Go</button></td>
+                                </tr>
+                              </tbody>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-sm-8 h-100">
+                <div id="google-map"></div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <!-- jQuery library -->
+    <script src="/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
+    <script
+      src='https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initGoogleMap&libraries=places&v=weekly'
+      async
+    ></script>
+  </body>
+</html>

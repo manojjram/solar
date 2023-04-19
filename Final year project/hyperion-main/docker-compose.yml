@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  tensorflow-serving:
+    image: tensorflow/serving:latest
+    ports:
+      - "8501:8501"
+    volumes:
+      - type: bind
+        source: F:\Final year project\hyperion-main\models\1\enb7_classifier
+        target: /models/model/1/enb7_classifier
+      - type: bind
+        source: F:\Final year project\hyperion-main\models\1\saved_model.pb
+        target: /models/model/1/saved_model.pb
+      - type: bind
+        source: F:\Final year project\hyperion-main\models\1\unet_segmentation
+        target: /models/model/1/unet_segmentation
+      - type: bind
+        source: F:\Final year project\hyperion-main\tensorflow_serving\model_config.conf
+        target: /models/model_config.conf
+
+  webapp-flask:
+    build: ./webapp/flask
+    ports:
+      - "5000:5000"
+    depends_on:
+      - tensorflow-serving
